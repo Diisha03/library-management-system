@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Available</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h2>Book Available</h2>
+    <nav>
+        <a href="transactions.html">Transactions</a> |
+        <a href="user-home.html">Back</a>
+    </nav>
+
+    <form id="bookSearchForm">
+        <label for="searchBook">Search Book:</label>
+        <input type="text" id="searchBook" name="searchBook">
+        <button type="submit">Search</button>
+    </form>
+
+    <p id="errorMessage" style="color:red;"></p>
+
+    <table border="1" id="bookResults" style="margin-top:20px;">
+        <thead>
+            <tr>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Available</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Search results will populate here -->
+        </tbody>
+    </table>
+
+    <script>
+        const books = [
+            {name: "Harry Potter", author:"J.K. Rowling", available:true},
+            {name: "The Hobbit", author:"J.R.R. Tolkien", available:true}
+        ];
+
+        document.getElementById('bookSearchForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const query = document.getElementById('searchBook').value.toLowerCase();
+            if(!query){
+                document.getElementById('errorMessage').innerText = "Please enter search value";
+                return;
+            }
+            const results = books.filter(b => b.name.toLowerCase().includes(query));
+            const tbody = document.querySelector("#bookResults tbody");
+            tbody.innerHTML = "";
+            results.forEach((book,index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${book.name}</td>
+                    <td>${book.author}</td>
+                    <td>${book.available ? "Yes" : "No"}</td>
+                    <td><input type="radio" name="selectBook" value="${index}"></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    </script>
+</body>
+</html>

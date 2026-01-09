@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<table>
+
+  <!-- TOP ROW -->
+  <tr>
+    <td style="width:20%;">Chart</td>
+    <td style="width:60%;"></td>
+    <td style="width:20%; text-align:right;">
+      <button onclick="history.back()">Back</button>
+    </td>
+  </tr>
+
+  <!-- EMPTY ROW -->
+  <tr>
+    <td></td><td></td><td></td>
+  </tr>
+
+  <!-- TITLE -->
+  <tr>
+    <td colspan="3" class="title">
+      Library Management System
+    </td>
+  </tr>
+
+  <!-- EMPTY ROW -->
+  <tr>
+    <td></td><td></td><td></td>
+  </tr>
+
+  <!-- USER ID -->
+  <tr>
+    <td><b>User ID</b></td>
+    <td colspan="2">
+      <input type="text" id="user" value="adm">
+    </td>
+  </tr>
+
+  <!-- PASSWORD -->
+  <tr>
+    <td><b>Password</b></td>
+    <td colspan="2">
+      <input type="password" id="pass" value="adm">
+    </td>
+  </tr>
+
+  <!-- BUTTON ROW -->
+  <tr>
+    <td colspan="3" class="btn-center">
+      <button onclick="login()">Login</button>
+    </td>
+  </tr>
+
+</table>
+
+<p id="error" style="color:red; text-align:center;"></p>
+
+</div>
+
+<script>
+function login() {
+  const user = document.getElementById("user").value.trim();
+  const pass = document.getElementById("pass").value.trim();
+
+  if (user === "" || pass === "") {
+    document.getElementById("error").innerText =
+      "Please enter valid User ID and Password";
+    return;
+  }
+
+  // Admin login success
+  window.location.href = "admin-home.html";
+}
+</script>
+
+</body>
+</html>

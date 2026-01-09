@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h2>Add Book</h2>
+    <nav>
+        <a href="maintenance.html">Maintenance</a> |
+        <a href="admin-home.html">Home</a>
+    </nav>
+
+    <form id="addBookForm">
+        <label>Type</label>
+        <input type="radio" name="type" value="book" checked> Book
+        <input type="radio" name="type" value="movie"> Movie<br><br>
+
+        <label for="title">Title*</label>
+        <input type="text" id="title"><br><br>
+
+        <label for="authorDirector">Author/Director*</label>
+        <input type="text" id="authorDirector"><br><br>
+
+        <label for="serialNo">Serial No*</label>
+        <input type="text" id="serialNo"><br><br>
+
+        <button type="submit">Add</button>
+    </form>
+
+    <p id="errorMsg" style="color:red;"></p>
+
+    <script>
+        document.getElementById('addBookForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const type = document.querySelector('input[name="type"]:checked').value;
+            const title = document.getElementById('title').value.trim();
+            const author = document.getElementById('authorDirector').value.trim();
+            const serial = document.getElementById('serialNo').value.trim();
+
+            if(!title || !author || !serial){
+                document.getElementById('errorMsg').innerText = 'Please fill all mandatory fields';
+                return;
+            }
+            alert((type === 'book' ? 'Book' : 'Movie') + ' added successfully!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

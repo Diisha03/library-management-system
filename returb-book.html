@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Return Book</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h2>Return Book</h2>
+    <nav>
+        <a href="transactions.html">Transactions</a> |
+        <a href="user-home.html">Home</a>
+    </nav>
+
+    <form id="returnBookForm">
+        <label for="bookName">Book Name*</label>
+        <input type="text" id="bookName"><br><br>
+
+        <label for="authorName">Author Name*</label>
+        <input type="text" id="authorName" readonly><br><br>
+
+        <label for="serialNo">Serial No*</label>
+        <input type="text" id="serialNo"><br><br>
+
+        <label for="issueDate">Issue Date*</label>
+        <input type="date" id="issueDate" readonly><br><br>
+
+        <label for="returnDate">Return Date*</label>
+        <input type="date" id="returnDate"><br><br>
+
+        <button type="submit">Return Book</button>
+    </form>
+
+    <p id="errorMsg" style="color:red;"></p>
+
+    <script>
+        document.getElementById('bookName').addEventListener('blur', function(){
+            const book = this.value.toLowerCase();
+            if(book === 'harry potter') {
+                document.getElementById('authorName').value = 'J.K. Rowling';
+                document.getElementById('issueDate').value = '2026-01-01';
+                document.getElementById('returnDate').value = '2026-01-16';
+            }
+            else {
+                document.getElementById('authorName').value = '';
+                document.getElementById('issueDate').value = '';
+                document.getElementById('returnDate').value = '';
+            }
+        });
+
+        document.getElementById('returnBookForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const book = document.getElementById('bookName').value.trim();
+            const author = document.getElementById('authorName').value.trim();
+            const serial = document.getElementById('serialNo').value.trim();
+            const issue = document.getElementById('issueDate').value;
+            const ret = document.getElementById('returnDate').value;
+
+            if(!book || !author || !serial || !issue || !ret){
+                document.getElementById('errorMsg').innerText = 'Please fill all mandatory fields';
+                return;
+            }
+            alert('Proceed to Pay Fine page!');
+            window.location.href = 'pay-fine.html';
+        });
+    </script>
+</body>
+</html>

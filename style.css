@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOP NAVIGATION BAR -->
+<div class="navbar">
+  <a href="#">Instructions</a>
+  <a href="#">Chart</a>
+  <a href="admin-login.html">Admin Login</a>
+  <a class="active" href="user-login.html">User Login</a>
+  <a href="user-home.html">User Home</a>
+</div>
+
+<div class="container">
+
+<table>
+  <tr>
+    <td>Chart</td>
+    <td></td>
+    <td><button onclick="history.back()">Back</button></td>
+  </tr>
+
+  <tr>
+    <td colspan="3

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h2>User Management</h2>
+    <nav>
+        <a href="maintenance.html">Maintenance</a> |
+        <a href="admin-home.html">Home</a>
+    </nav>
+
+    <form id="userManagementForm">
+        <label>Type</label>
+        <input type="radio" name="userType" value="new" checked> New User
+        <input type="radio" name="userType" value="existing"> Existing User<br><br>
+
+        <label for="userName">Name*</label>
+        <input type="text" id="userName"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="errorMsg" style="color:red;"></p>
+
+    <script>
+        document.getElementById('userManagementForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const name = document.getElementById('userName').value.trim();
+            if(!name){
+                document.getElementById('errorMsg').innerText = 'Name is required';
+                return;
+            }
+            alert('User processed successfully!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

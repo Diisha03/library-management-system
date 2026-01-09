@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reports</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h2>Reports</h2>
+
+    <nav>
+        <a href="admin-home.html">Home</a> |
+        <a href="transactions.html">Transactions</a> |
+        <a href="log-out.html">Logout</a>
+    </nav>
+
+    <h3>Select Report Type</h3>
+    <form id="reportsForm">
+        <input type="radio" id="booksReport" name="reportType" value="books">
+        <label for="booksReport">Master List of Books</label><br>
+
+        <input type="radio" id="moviesReport" name="reportType" value="movies">
+        <label for="moviesReport">Master List of Movies</label><br>
+
+        <input type="radio" id="membershipsReport" name="reportType" value="memberships">
+        <label for="membershipsReport">Master List of Memberships</label><br>
+
+        <input type="radio" id="activeIssuesReport" name="reportType" value="activeIssues">
+        <label for="activeIssuesReport">Active Issues</label><br>
+
+        <input type="radio" id="overdueReport" name="reportType" value="overdue">
+        <label for="overdueReport">Overdue Returns</label><br>
+
+        <input type="radio" id="issueRequestReport" name="reportType" value="issueRequests">
+        <label for="issueRequestReport">Issue Requests</label><br><br>
+
+        <button type="submit">Generate Report</button>
+    </form>
+
+    <p id="errorMsg" style="color:red;"></p>
+
+    <div id="reportResult" style="margin-top:20px;">
+        <!-- Report table will be populated here -->
+    </div>
+
+    <script>
+        const dummyData = {
+            books: [
+                { title: "Harry Potter", author: "J.K. Rowling", available: "Yes" },
+                { title: "The Hobbit", author: "J.R.R. Tolkien", available: "Yes" }
+            ],
+            movies: [
+                { title: "Inception", director: "Christopher Nolan", available: "Yes" },
+                { title: "Avatar", director: "James Cameron", available: "No" }
+            ],
+            memberships: [
+                { name: "John Doe", duration: "6 months", status: "Active" },
+                { name: "Jane Smith", duration: "1 year", status: "Active" }
+            ],
+            activeIssues: [
+                { book: "Harry Potter", user: "John Doe", issueDate: "2026-01-01", returnDate: "2026-01-16" }
+            ],
+            overdue: [
+                { book: "The Hobbit", user: "Jane Smith", issueDate: "2025-12-01", returnDate: "2025-12-16" }
+            ],
+            issueRequests: [
+                { book: "Avatar", user: "John Doe", requestDate: "2026-01-05" }
+            ]
+        };
+
+        document.getElementById('reportsForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const selectedReport = document.querySelector('input[name="reportType"]:checked');
+            const errorMsg = document.getElementById('errorMsg');
+            const reportDiv = document.getElementById('reportResult');
+            reportDiv.innerHTML = '';
+            errorMsg.innerText = '';
+
+            if(!selectedReport){
+                errorMsg.innerText = "Please select a report type";
+                return;
+            }
+
+            const reportType = selectedReport.value;
+            const data = dummyData[reportType];
+            if(!data || data.length === 0){
+                reportDiv.innerHTML = "<p>No records found.</p>";
+                return;
+            }
+
+            // Create table dynamically
+            const table = document.createElement('table');
+            table.border = '1';
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+
+            // Table header
+            const headers = Object.keys(data[0]);
+            const headerRow = document.createElement('tr');
+            headers.forEach(h => {
+                const th = document.createElement('th');
+                th.innerText = h.charAt(0).toUpperCase() + h.slice(1);
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Table body
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                headers.forEach(h => {
+                    const td = document.createElement('td');
+                    td.innerText = row[h];
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+
+            reportDiv.appendChild(table);
+        });
+    </script>
+</body>
+</html>

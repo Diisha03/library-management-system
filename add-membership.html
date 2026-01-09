@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Membership</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h2>Add Membership</h2>
+    <nav>
+        <a href="maintenance.html">Maintenance</a> |
+        <a href="admin-home.html">Home</a>
+    </nav>
+
+    <form id="addMembershipForm">
+        <label for="memberName">Member Name*</label>
+        <input type="text" id="memberName"><br><br>
+
+        <label>Duration*</label>
+        <input type="radio" name="duration" value="6" checked> 6 months
+        <input type="radio" name="duration" value="12"> 1 year
+        <input type="radio" name="duration" value="24"> 2 years<br><br>
+
+        <button type="submit">Add Membership</button>
+    </form>
+
+    <p id="errorMsg" style="color:red;"></p>
+
+    <script>
+        document.getElementById('addMembershipForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const name = document.getElementById('memberName').value.trim();
+            const duration = document.querySelector('input[name="duration"]:checked');
+            if(!name || !duration){
+                document.getElementById('errorMsg').innerText = 'Please fill all mandatory fields';
+                return;
+            }
+            alert('Membership added successfully!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

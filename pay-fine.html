@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay Fine</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h2>Pay Fine</h2>
+    <nav>
+        <a href="transactions.html">Transactions</a> |
+        <a href="user-home.html">Home</a>
+    </nav>
+
+    <form id="payFineForm">
+        <label for="fineAmount">Fine Amount</label>
+        <input type="text" id="fineAmount" value="0" readonly><br><br>
+
+        <label for="paidFine">Fine Paid*</label>
+        <input type="checkbox" id="paidFine"><br><br>
+
+        <label for="remarks">Remarks</label>
+        <textarea id="remarks"></textarea><br><br>
+
+        <button type="submit">Confirm</button>
+    </form>
+
+    <p id="errorMsg" style="color:red;"></p>
+
+    <script>
+        const fineAmount = parseInt(document.getElementById('fineAmount').value);
+        document.getElementById('payFineForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const paid = document.getElementById('paidFine').checked;
+            if(fineAmount > 0 && !paid){
+                document.getElementById('errorMsg').innerText = 'Please mark Fine Paid before confirming';
+                return;
+            }
+            alert('Book return transaction completed!');
+            window.location.href = 'user-home.html';
+        });
+    </script>
+</body>
+</html>

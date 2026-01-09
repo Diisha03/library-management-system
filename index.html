@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Select Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<table>
+
+  <!-- TOP ROW -->
+  <tr>
+    <td style="width:20%;">Chart</td>
+    <td style="width:60%;"></td>
+    <td style="width:20%; text-align:right;">
+      <button disabled>Back</button>
+    </td>
+  </tr>
+
+  <!-- EMPTY ROW -->
+  <tr>
+    <td></td><td></td><td></td>
+  </tr>
+
+  <!-- TITLE -->
+  <tr>
+    <td colspan="3" class="title">
+      Library Management System
+    </td>
+  </tr>
+
+  <!-- EMPTY ROW -->
+  <tr>
+    <td></td><td></td><td></td>
+  </tr>
+
+  <!-- SELECTION -->
+  <tr>
+    <td colspan="3" class="btn-center">
+      <button onclick="goAdmin()">Admin Login</button>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="3" class="btn-center">
+      <button onclick="goUser()">User Login</button>
+    </td>
+  </tr>
+
+</table>
+
+</div>
+
+<script>
+function goAdmin() {
+  window.location.href = "admin-login.html";
+}
+
+function goUser() {
+  window.location.href = "user-login.html";
+}
+</script>
+
+</body>
+</html>
